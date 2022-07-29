@@ -1,5 +1,8 @@
 const redux = require('redux');
-// since createStore is deprecated  instead of const createStore = redux.createStore; we are using the below code  
+
+console.log(redux);
+
+/* since createStore is deprecated  instead of const createStore = redux.createStore; we are using the below code */
 const createStore = redux.legacy_createStore;
 
 
@@ -23,7 +26,7 @@ const initialState = {
 // Reducer is a function that accepts state and action as argument
 const reducer = (state = initialState, action) => {
   
-  console.log('This is what action holds',{action});
+  // console.log('This is what action holds',{action});
 
   switch (action.type) {
     case CAKE_ORDERED:
@@ -36,15 +39,43 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-
+// Creates a Redux store
 const store =  createStore(reducer);
 
+// Log initial state of the application 
 console.log('store initial application state', store.getState());
 
-store.subscribe(()=> console.log('update state', store.getState()));
+// Listener is setup on the store, any time the store updates log is print on terminal 
+const unsubscribe = store.subscribe(() => 
+  {
+    console.log('store is subscribed and log is prints updated state after every dispatch = ', store.getState())
+  }
+);
+
 
 store.dispatch(order_cake());
 store.dispatch(order_cake());
 store.dispatch(order_cake());
 
-// store.unsubscribe();
+// Listener is unsubscribed, so any dispatch action called will not be logged on the terminal
+unsubscribe();
+
+
+/* 
+  Even though the dispatch action is executed successfully, 
+  there will be no print logs because it not subscribed 
+*/
+store.dispatch(order_cake());
+
+// New Listener is setup on the store, any time the store updates a log is print on terminal 
+const newUnsubscribe = store.subscribe(() => 
+{
+  console.log('store is subscribed **AGAIN** and log is prints updated state after every dispatch = ', store.getState())
+}
+);
+
+// Example let the look at the updated application state
+store.dispatch(order_cake());
+
+
+newUnsubscribe();
