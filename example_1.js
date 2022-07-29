@@ -37,22 +37,22 @@ const initialState = {
 }
 
 
-const reducer = (state = initialState, action) => {
+const reducer = (currentState = initialState, action) => {
   console.log({action})
 
   switch (action.type) {
     case CAKE_ORDERED:
       return { 
-        ...state, 
-        numOfCakes: state.numOfCakes - 1 
+        ...currentState, 
+        numOfCakes: currentState.numOfCakes - 1 
       }
       case CAKE_RESTOCKED:
         return { 
-          ...state, 
-          numOfCakes: state.numOfCakes + action.payload.quantity 
+          ...currentState, 
+          numOfCakes: currentState.numOfCakes + action.payload.quantity 
         }
       default:
-      return state
+      return currentState
   }
 }
 
