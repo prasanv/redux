@@ -1,5 +1,5 @@
 /* 
-  EXample 2 things to notice 
+  EXample 3 things to notice 
     - We are using Immer Library for update nested state properties
 */
 
