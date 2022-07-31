@@ -6,10 +6,10 @@ console.log(redux);
 const createStore = redux.legacy_createStore;
 
 
-// Action is object with type property and  type prop should always be a constant
+// Action is object with type property and `type` prop should always be a constant
 const CAKE_ORDERED = 'CAKE_ORDERED';
 
-// Action Creator is a function that returns a Action object 
+// Action Creator is a function that returns a Action object which consists of type and payload
 function order_cake() {
   return {
     type: CAKE_ORDERED,
@@ -24,18 +24,18 @@ const initialState = {
 }
 
 // Reducer is a function that accepts state and action as argument
-const reducer = (state = initialState, action) => {
+const reducer = (currentState = initialState, action) => {
   
   // console.log('This is what action holds',{action});
 
   switch (action.type) {
     case CAKE_ORDERED:
       return { 
-        ...state, 
-        numOfCakes: state.numOfCakes - 1 
+        ...currentState, 
+        numOfCakes: currentState.numOfCakes - 1 
       }
     default:
-      return state
+      return currentState
   }
 }
 
