@@ -1,5 +1,5 @@
 /* 
-  EXample $ things to notice 
+  EXample 4 things to notice 
     - We are using applyMiddleware method to pass in redux-logger
     - Note: Similarly we can pass various other things through the middleware
 */
